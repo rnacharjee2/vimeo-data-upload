@@ -31,7 +31,7 @@ for x in video_link_list:
 
 video_id_check_folder_removal = None
 
-for x in video_link_list[0:1900]:
+for x in video_link_list[1900:3852]:
     
     video_id = x['video_id']
     video_url = x['link']
