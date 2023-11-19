@@ -31,8 +31,8 @@ for x in video_link_list:
 
 video_id_check_folder_removal = None
 
-for x in video_link_list[0:2]:
-    time.sleep(.1)
+for x in video_link_list:
+    
     video_id = x['video_id']
     video_url = x['link']
     rendition = x['rendition'] 
@@ -213,7 +213,7 @@ for x in video_link_list[0:2]:
 
             if not os.path.exists(m3u8_file_path):
                 with open('hls_failed_log.txt', 'a') as log_file:
-                    log_file.write( + '\n')
+                    log_file.write(video_url + '\n')
 
             shutil.rmtree(video_id_check_folder_removal)
             print(f"Successfully removed the directory: {video_id_check_folder_removal}")
