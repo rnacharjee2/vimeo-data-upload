@@ -14,7 +14,7 @@ account_key = "6G6P/YPwFD7x9xSLj5agJ3yT2zRLBFmhOfeWxH7WoD2Mh3Dia4CmrEYD7+zwJTJHk
 container_name = "videos"
 
 # Path to your CSV file
-csv_file_path = "output.csv"
+csv_file_path = "mhs_no_upload_output.csv"
 
 def get_blob_size(video_id,rendition,):
     connection_string = f"DefaultEndpointsProtocol=https;AccountName={account_name};AccountKey={account_key};EndpointSuffix=core.windows.net"
@@ -39,6 +39,10 @@ total_success_blob = 0
 total_failed_blob = 0
 
 failed = []
+output_csv_file = "check.csv"
+csv_headers = ["video_id","rendition", "size"]
+
+data_to_write=[]
 
 # Read video_id values from the CSV file
 with open(csv_file_path, 'r') as csv_file:
@@ -47,13 +51,13 @@ with open(csv_file_path, 'r') as csv_file:
         video_id = row['video_id']
         rendition = row['rendition']
 
-        blob_name = f'{video_id}/hls/{video_id}.m3u8'
+        blob_name = f'{video_id}/{video_id}_{rendition}.mp4'
 
         account_name = 'ctallstorage'
         account_key = '6G6P/YPwFD7x9xSLj5agJ3yT2zRLBFmhOfeWxH7WoD2Mh3Dia4CmrEYD7+zwJTJHkFPrVpu439kc+ASt4KRcAQ=='
         container_name = 'videos'
         
-        blob_name = f'{video_id}/hls/{video_id}.m3u8' # The name for the blob in Azure Blob Storage
+        blob_name = f'{video_id}/{video_id}_{rendition}.mp4' # The name for the blob in Azure Blob Storage
 
         # Create a connection to the Blob Service
         blob_service_client = BlobServiceClient(account_url=f"https://{account_name}.blob.core.windows.net", credential=account_key)
@@ -73,15 +77,33 @@ with open(csv_file_path, 'r') as csv_file:
 
             # blob_size = round(get_blob_size(video_id, rendition)/1024/1024,0)
 
-            print(f'{blob_name}, ----------, ')
+            print(f'{blob_name}, ----------exists')
+            data_to_write.append([video_id,rendition,"exists"])
 
-            # save in a csv file
+
+            # Write the data to a CSV file
+
+            with open(output_csv_file, mode="w", newline="") as file:
+                writer = csv.writer(file)
+                writer.writerow(csv_headers)
+                writer.writerows(data_to_write)
+
+            print(f"Data saved to {output_csv_file}")
+
 
         else:
             total_failed_blob +=1
             print(f'Does Not Exists - {video_id}_{rendition}')
             failed.append(video_id)
-print(failed)
+            data_to_write.append([video_id,rendition,"failed"])
+            with open(output_csv_file, mode="w", newline="") as file:
+                writer = csv.writer(file)
+                writer.writerow(csv_headers)
+                writer.writerows(data_to_write)
+
+            print(f"Data saved to {output_csv_file}")
+print(len(failed))
+
         
 
         

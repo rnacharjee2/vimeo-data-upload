@@ -1,3 +1,0 @@
-https://player.vimeo.com/progressive_redirect/playback/663049794/rendition/240p/file.mp4?loc=external&oauth2_token_id=1643955558&signature=3f26084e9740fd02aed83ee322d3d53ea9569813fcb9418df8c8c8f6e79e95a9
-https://player.vimeo.com/progressive_redirect/playback/663049794/rendition/1080p/file.mp4?loc=external&oauth2_token_id=1643955558&signature=cc0bc68241cd9bd622a1a9645cfae69cef8a243131d2b272bae893286b844249
-https://player.vimeo.com/progressive_redirect/playback/663049794/rendition/540p/file.mp4?loc=external&oauth2_token_id=1643955558&signature=c6ecc943643d70177754e688085ee08076fc70d9364ba1f343a18c5690f17008

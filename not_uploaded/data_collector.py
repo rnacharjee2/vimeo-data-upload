@@ -2,7 +2,7 @@ import requests
 import csv
 import time
 
-video_csv_file = "livemcq_video_series.csv"
+video_csv_file = "all_not_uploaded_id.csv"
 header_name = "videoid"
 video_id_list = []
 
@@ -22,10 +22,10 @@ main_url = "https://api.vimeo.com/me/videos/"
 authorization_token = "Bearer d83d332f82236a5fdafc80b598310b6f"
 
 # Define the CSV file and column headers
-output_csv_file = "output.csv"
+output_csv_file = "all_no_upload_output.csv"
 # Adjust column headers as needed
 csv_headers = ["video_id", "quality", "rendition", "type", "width",
-               "height", "public_name", "fps", "size", "size_short", "link"]
+               "height", "public_name", "fps", "size", "size_short", "link","created_at"]
 
 # Initialize an empty list to store the data
 data_to_write = []
@@ -55,11 +55,12 @@ for counter, id in enumerate(video_id_list):
             fps = x.get("fps", "")
             size = x.get("size", "")
             size_short = x.get("size_short", "")
+            created_at = x.get("created_time", "")
             link = x.get("link", "")
 
             # Append the data to the list
             data_to_write.append([video_id, quality, rendition, type, width,
-                                 height, public_name, fps, size, size_short, link])
+                                 height, public_name, fps, size, size_short, link, created_at])
 
     except Exception as e:
         print(f"Error fetching data from {url}: {e}")
