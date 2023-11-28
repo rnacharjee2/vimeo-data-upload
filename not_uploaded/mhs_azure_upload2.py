@@ -6,7 +6,7 @@ import subprocess
 import shutil
 import time
 
-video_link_csv = 'mhs_output.csv'
+video_link_csv = 'all_no_upload_output.csv'
 
 video_link_list = []
 success_log_file = 'success_log.txt'
